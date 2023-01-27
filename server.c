@@ -14,6 +14,25 @@ int main(int argc, char* argv[]){
         printf("unable to create fifo file \n error");
         return 1;
     }
-    //(errno != EEXIST) - if errors now about existing file 
+
+
+    int i, pid[argc], status, stat;
+    char arg[40];
+    if (argc<2) {
+        printf("Usage: file textfile1...\n");
+        exit(-1);
+    }
+    strcpy(arg,argv[i]);
+    pid[i] = fork(); 
+    if (pid[i] == 0) {      // child process
+        if (execl("./child.exe",arg, NULL)<0) {
+            printf("ERROR while start processing file %s\n",argv[i]);
+            exit(-2);
+        }
+        else {
+            printf( "processing of file %s started (pid=%d)\n", argv[i],pid[i]);
+        }
+    }
+    
     return 0;
 }
