@@ -10,17 +10,29 @@
 #include <fcntl.h>
 
 int main(){//int argc, char* argv[]
-    int output_Fd = open("myfifo_1", O_RDONLY);
-    if (output_Fd == -1){
+    int input_Fd = open("myfifo_1", O_RDONLY);
+    if (input_Fd == -1){
         printf("client can't read \n");
         return 1;
     }
+
     char name_of_file;
-    if(read(output_Fd, &name_of_file, sizeof(int))== -1){
+    /*
+    if(read(input_Fd, &name_of_file, sizeof(int))== -1){
         printf("can't read \n");
         return 2;
+    }*/
+
+    int numRead;
+    while (( numRead = read(input_Fd, &name_of_file, 1) > 0)){
+        printf("%s", &name_of_file);
     }
-    printf("name of file = %s\n", name_of_file);
-    close(output_Fd);
+    printf("\n");
+    
+
+    /*for (int i=0;i<40;i++){
+        printf("name of file = %s\n", name_of_file[i]);
+    }*/
+    close(input_Fd);
     return 0;
 }
