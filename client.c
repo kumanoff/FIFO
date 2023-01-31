@@ -8,10 +8,21 @@ int main() {
    char s[100] = "";
    char s1[2000] = ""; 
    int fd, fd1;
+
    fd = open("fifo1", O_WRONLY);
+   if (fd == -1) {
+        printf("Error opening fifo1 file\n");
+        exit(-3);
+    }
    fd1 = open("fifo2", O_RDONLY); 
+   if (fd1 == -1) {
+        printf("Error opening fifo2 file\n");
+        exit(-4);
+    }
+
    printf("\nEnter the file name:");
    scanf("%s", s);
+
    write(fd, s, strlen(s));
    printf("file content is:\n");
    while (read(fd1, s1, sizeof(int))>0){
