@@ -6,14 +6,17 @@
 #include<string.h>
 int main() {
    char s[100] = "";
-   char s1[1000] = "";
+   char s1[2000] = ""; 
    int fd, fd1;
    fd = open("fifo1", O_WRONLY);
-   fd1 = open("fifo2", O_RDONLY);
+   fd1 = open("fifo2", O_RDONLY); 
    printf("\nEnter the file name:");
    scanf("%s", s);
    write(fd, s, strlen(s));
-   while (read(fd1, s1, 1000) != 0) {
-      printf("File Content :%s", s1);
+   printf("file content is:\n");
+   while (read(fd1, s1, sizeof(int))>0){
+      printf("%s", s1); 
    }
+   close (fd);
+   close (fd1); 
 }
