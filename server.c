@@ -62,7 +62,6 @@ int main() {
       else{
          
          write(fd3, &fcontent, 1);
-         printf("fcontent = %s \n", &fcontent);
          if (fcontent == '.') {
             fcontent = 0x0a;
             write(fd3, &fcontent, numRead);

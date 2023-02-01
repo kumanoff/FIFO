@@ -24,7 +24,7 @@ int main() {
    scanf("%s", s);
 
    write(fd, s, strlen(s));
-   printf("file content is:\n");
+   printf("result of operation:\n");
    while (read(fd1, s1, sizeof(int))>0){
       printf("%s", s1); 
    }
